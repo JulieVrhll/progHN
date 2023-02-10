@@ -1,0 +1,44 @@
+html{
+	font-size: 14px;
+}
+
+body{
+	background-color:#BE40FA;
+	font-size: 1rem;
+	width: 100vw;
+}
+
+h1{
+	font-size: 3rem;
+}
+
+h2{
+	font-size: 2rem;
+}
+
+#page{
+	margin: auto;
+	width: 60%;
+	background-color: #E3A9FF;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #5B177C;
+}	
+
+.entete {
+	text-align: center;
+}
+
+#aboutme {
+	margin: 50px;
+	padding: 10px 35px 10px 35px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: #5B177C;
+	background-color: #EBD1F7;
+}
+
+footer {
+	margin: auto;
+	text-align: center;
+}

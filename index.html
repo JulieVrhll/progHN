@@ -35,9 +35,37 @@
 					<li>Dune, F. Herbert</li>
 				</ol>
 			</div> 
-                <footer>
-					<p>Aller sur le site de <a href="http://www.univ-paris3.fr/">Paris 3</a>.</p>
-				</footer>
+			<h4>Les pays que j'aime sont : <h4>
+			<h5>
+			<ul>
+				<li>la France</li>
+				<li>la Corée</li>
+				<li>l'Egypte</li>
+				<li>l'Espagne</li>
+				<li>le japon</li>
+			</ul>
+			 </h5>
+			<p>Mon pays préféré est</p>
+<p id="pays"></p>
+
+<script>
+let text = "la France, la Corée, l'Egypte, l'Espagne, le Japon";
+let part = text.slice(10,19);
+document.getElementById("pays").innerHTML = part; 
+</script>
+
+			<button onclick="myFunction()">Clic pour une surprise</button>
+				<p id="surprise"></p>
+			<script>
+				function myFunction() {
+					document.getElementById("surprise").innerHTML = "Bouh !!";
+				}
+			</script>
+            <footer>
+				<p>Aller sur le site de 
+					<a href="http://www.univ-paris3.fr/">Paris 3</a>.
+				</p>
+			</footer>
 		</body>
 	</html>
 </div>

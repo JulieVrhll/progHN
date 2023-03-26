@@ -11,8 +11,11 @@ function exercice2() {
     text = text.replace(/[.,\"]/g,"");
     text = text.replace(/\'/g," ");
     let mots = text.split(" ");
-    let maj = text.toUpperCase();
-    document.getElementById("exercice2Resultat").innerHTML = maj;
+   for (let i = 0; i < mots.length; i++) {
+    	mots[i] = mots[i].toUpperCase();
+  	}
+ 	let maj = mots.join(" ");
+ 	document.getElementById("exercice2Resultat").innerHTML = maj;
 }
 
 

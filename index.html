@@ -5,6 +5,7 @@
 			<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
 			<title> Programmation pour les humanités numériques</title>
 			<link rel="stylesheet" href="assets/css/style.css" >
+			<script src="assets/JS/main.js"></script>
 		</head>
 
 		<body>
@@ -60,7 +61,71 @@
 					document.getElementById("surprise").innerHTML = "Bouh !!";
 				}
 			</script>
-            <footer>
+			
+			                <!-- Analyse des données dans un fichier -->
+                <div id="container">
+            <h2 style="text-align:center;">Analyse des <span style="color:#5B177C">données</span> dans un fichier</h2>
+
+            <div id="page-wrapper">
+                <div>
+                    <center><button id="button_aide" onclick="showHide_aide()">Afficher l'aide</button></center>
+                    <div id="aide" style="display:none;">
+                        <p>Voici un mode d'emploi :
+                        </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
+                        </br>Etape 2 : Cliquez sur le bouton Segmenter (et précisez les délimiteurs si besoin avant).
+                        </br>Etape 3 : ...</p>
+                    </div>
+                </div>
+                </br>
+                <div>
+                    <span>
+                        <label for="fileInput" class="btn"><small>Sélectionner un fichier au format .txt
+                                :</small></label>
+                        <input id="fileInput" type="file" accept="text/plain" name="Fichier (.txt)" />
+                    </span>
+                </div>
+                <br />
+                <p style="text-align:center;">
+                    <small>
+                        <label for="delimID" class="mylabel">Délimiteur(s)</label>
+                        &nbsp;
+                        <input type="text" value=" ,;’'~|&#@=`-.?!%*$()[]{}_:+«»§\/" name="delim" id="delimID" size="40" />
+                    </small>
+                    <br />
+                    <small>
+                        <label for="poleID" class="mylabel">Pôle</label>
+                        &nbsp;
+                        <input type="text" placeholder="entrez un pôle..." name="pole" id="poleID" size="20" />
+                    </small>
+                    &nbsp;
+                    <small>
+                        <label for="lgID" class="mylabel">Longueur</label>
+                        &nbsp;
+                        <input type="text" value="10" name="lg" id="lgID" size="10" />
+                    </small>
+                    <br />
+                    <br />
+                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
+                    <br />
+                    <br />
+                    <button class="seg" onclick="segText()"><span>Segmentation</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !');"><span>action 1</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
+                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+                </p>
+            </div>
+            <div id="logger" style="width:100%"></div>
+            <br />
+            <div id="Global">
+                <div id="fileDisplayArea"></div>
+                <div id="page-analysis"></div>
+            </div>
+        </div>
+                <!-- FIN Analyse des données dans un fichier -->			
+				<footer>
 				<p>Aller sur le site de 
 					<a href="http://www.univ-paris3.fr/">Paris 3</a>.
 				</p>

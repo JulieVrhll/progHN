@@ -29,7 +29,33 @@ function exercice3() {
 	document.getElementById("exercice3Resultat").innerHTML = result;
 }
 
+// Version ex4 avec résultat sous forme de tableau
+function exercice4() {			
+	let text = document.getElementById("texteExercice4").value;
+	text = text.replace(/[.,\"]/g,"");
+    text = text.replace(/\'/g," ");
+	let mots = text.split(" ");
+	let tableau = document.createElement("table");
+	tableau.style.borderCollapse = "collapse";
+	tableau.style.width = "100%";
+	let tbody = document.createElement("tbody");
+	tableau.appendChild(tbody);
+	mots.forEach(function(mot) {
+		let tr = document.createElement("tr");
+		let td = document.createElement("td");
+  		let motNode = document.createTextNode(mot);
+  		td.style.border = "1px solid #ddd";
+  		td.style.padding = "8px";
+  		td.style.textAlign = "left";
+  		td.appendChild(motNode);
+  		tr.appendChild(td);
+  		tbody.appendChild(tr);
+	});
+	let resultat = document.getElementById("exercice4Resultat");
+	resultat.appendChild(tableau);
 
+
+/* sous forme de ligne
 function exercice4() {
 	let text = document.getElementById("texteExercice4").value;
 	text = text.replace(/[.,\"]/g,"");
@@ -41,3 +67,4 @@ function exercice4() {
 });
 	document.getElementById("exercice4Resultat").innerHTML = tableau;
 }
+*/

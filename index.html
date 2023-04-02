@@ -72,8 +72,8 @@
                     <div id="aide" style="display:none;">
                         <p>Voici un mode d'emploi :
                         </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
-                        </br>Etape 2 : Cliquez sur le bouton Segmenter (et précisez les délimiteurs si besoin avant).
-                        </br>Etape 3 : ...</p>
+                        </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmenter (et précisez les délimiteurs si besoin avant).
+                        </br>Etape 3 :  Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences</p>
                     </div>
                 </div>
                 </br>
@@ -108,8 +108,8 @@
                     <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
                     <br />
                     <br />
-                    <button class="seg" onclick="segText()"><span>Segmentation</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !');"><span>action 1</span></button>
+                    <button class="dict" onclick="segText()"><span>Segmentation</span></button>
+                    <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
@@ -118,7 +118,8 @@
                 </p>
             </div>
             <div id="logger" style="width:100%"></div>
-            <br />
+           <div id="logger2" style="width:100%"></div>
+		   <br />
             <div id="Global">
                 <div id="fileDisplayArea"></div>
                 <div id="page-analysis"></div>

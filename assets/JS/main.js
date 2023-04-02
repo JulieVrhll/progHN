@@ -17,6 +17,7 @@ function maj() {
 }
 
 // Analyse des données dans un fichier
+
 window.onload = function() {
     let fileInput = document.getElementById('fileInput');
     let fileDisplayArea = document.getElementById('fileDisplayArea');
@@ -40,6 +41,9 @@ window.onload = function() {
             // dans la zone d'affichage du texte.
             reader.onload = function(e) {
                 fileDisplayArea.innerText = reader.result;
+				segText();
+                let nbTokens = global_var_tokens.length;
+                document.getElementById("logger2").innerHTML = '<span class="infolog">Nombre de tokens : ' + nbTokens + ' </span>';
             }
 
             // on lit concrètement le fichier.
@@ -69,6 +73,29 @@ function showHide_aide() {
 	    	}
 }
 
+// version 1 segText() 
+function segText() {
+    let text = document.getElementById("fileDisplayArea").innerText;
+    let delim = document.getElementById("delimID").value;
+    let display = document.getElementById("page-analysis");
+
+    let regex_delim = new RegExp(
+        "["
+        + delim
+            .replace("-", "\\-") // le tiret n'est pas à la fin : il faut l'échapper, sinon erreur sur l'expression régulière
+            .replace("[", "\\[").replace("]", "\\]") // à changer sinon regex fautive, exemple : [()[]{}] doit être [()\[\]{}], on doit "échapper" les crochets, sinon on a un symbole ] qui arrive trop tôt.
+        + "\\s" // on ajoute tous les symboles d'espacement (retour à la ligne, etc)
+        + "]+" // on ajoute le + au cas où plusieurs délimiteurs sont présents : évite les tokens vides
+    );
+
+    let tokens = text.split(regex_delim);
+    tokens = tokens.filter(x => x.trim() != ""); // on s'assure de ne garder que des tokens "non vides"
+
+    global_var_tokens = tokens; // décommenter pour vérifier l'état des tokens dans la console développeurs sur le navigateur
+    display.innerHTML = tokens.join(" ");
+}
+
+/* version 2 segText()
 function segText() {
 	let texte = document.getElementById("fileDisplayArea").textContent;
 	let delim = document.getElementById("delimID").value;
@@ -78,4 +105,34 @@ function segText() {
 	let segments = texte.split(regex);
 	let result = segments.join(" ");
 	document.getElementById("page-analysis").innerHTML = result;
+}
+*/
+
+function dictionnaire() {
+  let tokenFreq = {};
+  let tokens = global_var_tokens;
+  
+  // Compter la fréquence de chaque token
+  tokens.forEach(token => tokenFreq[token] = (tokenFreq[token] || 0) + 1);
+  
+  // Convertir l'objet en tableau de paires clé-valeur
+  let freqPairs = Object.entries(tokenFreq);
+  
+  // Trier le tableau par fréquence décroissante
+  freqPairs.sort((a, b) => b[1] - a[1]);
+  
+  // Ajouter l'entête du tableau
+  let tableArr = [['<b>Token</b>', '<b>Fréquence</b>']];
+  
+  // Créer un tableau de tableaux contenant les tokens et leurs fréquences
+  let tableData = freqPairs.map(pair => [pair[0], pair[1]]);
+  
+  // Concaténer les deux tableaux
+  let finalTable = tableArr.concat(tableData);
+  
+  // Créer le tableau HTML à partir du tableau final
+  let tableHtml = finalTable.map(row => '<tr><td>' + row.join('</td><td>') + '</td></tr>').join('');
+  
+  // Afficher le tableau HTML dans la page
+  document.getElementById('page-analysis').innerHTML = '<table>' + tableHtml + '</table>';
 }

@@ -1,5 +1,8 @@
 html{
 	font-size: 14px;
+	background-color: rgb(255 138 243);
+	width: 100vw;
+	font-family: "Lucida Console", "Courier New", monospace;
 }
 
 body{

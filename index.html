@@ -72,7 +72,7 @@
                     <div id="aide" style="display:none;">
                         <p>Voici un mode d'emploi :
                         </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
-                        </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmenter (et précisez les délimiteurs si besoin avant).
+                        </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmentation (et précisez les délimiteurs si besoin avant).
                         </br>Etape 3 :  Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences</p>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                     <br />
                     <button class="dict" onclick="segText()"><span>Segmentation</span></button>
                     <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 2</span></button>
+                    <button class="grep" id="btnGrep" onclick="grep()"><span>GREP</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
                     <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
@@ -119,6 +119,7 @@
             </div>
             <div id="logger" style="width:100%"></div>
            <div id="logger2" style="width:100%"></div>
+		   <div id="logger3" style="width:100%"></div>
 		   <br />
             <div id="Global">
                 <div id="fileDisplayArea"></div>

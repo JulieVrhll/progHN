@@ -99,3 +99,15 @@ footer {
 	height:200px;
 	overflow:scroll;
 }
+
+#logger3{
+	color:red;
+}
+
+table, th, td {
+	border: 1px solid;
+}
+
+td, th {
+	padding: 1px 8px;
+}

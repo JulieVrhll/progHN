@@ -213,3 +213,122 @@ function grep(){
         }
     }
 }
+
+//Concordancier---------------------------------------------------------------------------
+function concord() {
+    if (document.getElementById('fileDisplayArea').innerHTML == "") {
+        document.getElementById('logger3').innerHTML = "Il faut d'abord charger un fichier .txt !";
+        } else {
+            document.getElementById('logger3').innerHTML="";
+            let poleInput = document.getElementById('poleID').value;
+            if (poleInput == "") {
+                document.getElementById('logger3').innerHTML = "Il faut d'abord entrer un pôle !";
+                } else {
+                    document.getElementById('logger3').innerHTML="";
+                    let lgInput = document.getElementById('lgID').value;
+                    // Vérifier si une longueur a été saisi, et si > 0
+                    if (lgInput == "" || lgInput < 1) {
+                    // Afficher un message d'erreur
+                        document.getElementById('logger3').innerHTML = "Il faut d'abord entrer une longueur > 0 !";
+                        } else {
+                            // Récupérer le pôle et le convertir en regex
+						  	let poleRegex = new RegExp(document.getElementById("poleID").value, "gi"); // le "i" indique de ne pas prendre en compte la casse
+						  	//Récupérer la valeur de "lgInput" (longueur de contexte) et conversion en nombre entier
+						  	let long = parseInt(document.getElementById("lgID").value);
+						
+						  	// Chercher le mot et créer une liste de concordance avec la méthode Array.prototype.reduce()
+						  	// On applique .reduce sur global_var_tokens. Le callback prend en paramètres acc : accumulateur initialisé à 0 ;  token : valeur courante ; i : index de la valeur courante
+						  	let concordance = global_var_tokens.reduce((acc, token, i) => {
+						  		// A chaque itération du callback on teste si le "poleRegex" correspond au token courant
+						    	if (poleRegex.test(token)) {
+						    		// Si oui, création du contexte gauche (cLeft) et droit (cRight)
+						      		const cLeft = global_var_tokens.slice(Math.max(0, i - long), i).join(" "); // Ex : si long=10, on sélectionne les tokens de index du token courant -10 à index du token courant, càd les 10 tokens précédant le token courant. Mais si (i - 10) < 0, alors on reprend au début du texte. Math.max(0, i - long) renvoie le maximum entre deux nombres : 0 et (i - long)
+						      		const cRight = global_var_tokens.slice(i + 1, Math.min(global_var_tokens.length, i + long + 1)).join(" "); // De la même manière : puisque i est l'index token courant et qu'on veut sélectionner les 10 tokens suivants, on reprend à partir de (i + 1) jusqu'à (i + long(ici 10) + 1) ou bien jusqu'à la fin du texte si (i + long + 1)>global_var_tokens.length.
+						      		acc.push([cLeft, token, cRight]); // Ajout de (contexte gauche, pôle, contexte droit) à la liste acc
+						   	 		}
+						    		return acc;
+						    		}, []); // [] correspondent à l'accumulateur initialisé, à chaque fois que la fonction callback trouve que "poleRegex" correspond au token courant, elle ajoute une nouvelle entrée dans le tableau
+						
+								  // Afficher les résultat dans une table HTML
+								  let table = document.createElement("table");
+								  table.innerHTML = "<thead><tr><th>Contexte gauche</th><th>Pôle</th><th>Contexte droit</th></tr></thead>";
+								  concordance.forEach(([cLeft, pole, cRight]) => { // Itération sur chaque élément de "concordance" pour remplir la table
+								  	// Insertion d'une nouvelle ligne dans la table
+								  	let row = table.insertRow();
+								  	// Ajouter les données à la ligne
+								    row.innerHTML = "<td>" + cLeft + "</td><td>" + pole + "</td><td>" + cRight + "</td>";
+								    });
+								    
+                             		// Vérifier si des résultats ont été trouvés
+                               		if (table.innerHTML == "<thead><tr><th>Contexte gauche</th><th>Pôle</th><th>Contexte droit</th></tr></thead>") {
+	                                    // Effacer les résulats précédent
+	                                    document.getElementById('page-analysis').innerHTML = "";
+	                                    // Afficher un message d'erreur
+	                                    document.getElementById('logger3').innerHTML = "Aucune correspondance trouvée.";
+                                    	} else {
+                                    		// Effacer tout message d'erreur précédent
+                                          	document.getElementById('logger3').innerHTML = "";
+                                           	// Injecter le tableau résultant dans l'élément HTML
+                                          	document.getElementById("page-analysis").innerHTML = "";
+                                          	document.getElementById("page-analysis").appendChild(table);
+                                          	}
+                                    }
+                        }
+            }
+}
+
+
+//Nombre de phrases-----------------------------------------
+function nbPhrases() {
+    if (document.getElementById('fileDisplayArea').innerHTML==""){
+        document.getElementById('logger3').innerHTML="Il faut d'abord charger un fichier .txt !";
+        } else {
+            document.getElementById('logger3').innerHTML="";
+            let text = document.getElementById("fileDisplayArea").innerText;
+            let phrase= /[.!?]/g;
+            let nbPhrases = text.split(phrase);
+            let resultat = nbPhrases.length-1;
+            document.getElementById('page-analysis').innerHTML = '<div>Il y a ' + resultat + ' phrases dans ce texte.</div>';
+            }
+}
+
+//Mots les plus longs----------------------------------------------
+function tokenLong() {
+     if (document.getElementById('fileDisplayArea').innerHTML==""){
+        document.getElementById('logger3').innerHTML="Il faut d'abord charger un fichier .txt !";
+        } else {
+            document.getElementById('logger3').innerHTML="";
+            // Trier le tableau 'global_var_tokens' par ordre décroissant de longueur et garder les 10 premiers éléments
+            let tokenSort = global_var_tokens.sort((a, b) => b.length - a.length).slice(0, 10);
+            // Convertir chaque token en une ligne de tableau HTML avec sa longueur
+            let map = tokenSort.map(token => '<tr><td>' + token + '</td><td>' + token.length + '</td></tr>').join('');
+            //Tableau HTML
+            let resultat = '<table><tr><th colspan=2><b>Mots les Plus Longs</b></th></tr><tr><th><b>Mot</b></th><th><b>Longueur</b></th></tr>' + map + '</table>';
+            // Injecter le tableau dans l'élément HTML
+            document.getElementById('page-analysis').innerHTML = resultat;
+            }
+}
+
+//Top10 tokens les plus fréquents-----------------------------------
+function top10freq() {
+    if (document.getElementById('fileDisplayArea').innerHTML==""){
+        document.getElementById('logger3').innerHTML="Il faut d'abord charger un fichier .txt !";
+        } else {
+            document.getElementById('logger3').innerHTML="";
+            // Compter le nombre d'occurrences de chaque token dans le tableau 'global_var_tokens'
+            let count = {};
+            global_var_tokens.forEach(token => {
+                count[token] = (count[token] || 0) + 1;
+                });
+            // Trier les tokens par ordre décroissant de fréquence et garder les 10 premiers éléments
+            let top10 = Object.keys(count).sort((a, b) => count[b] - count[a]).slice(0, 10);
+            // Convertir chaque token en une ligne de tableau HTML avec sa fréquence
+            map = top10.map(token => '<tr><td>' + token + '</td><td>' + count[token] + '</td></tr>').join('')
+            // Tableau HTML
+            let resultat = '<table><tr><th colspan=2><b>Top 10 des mots les plus fréquents</b></th></tr><tr><th><b>Token</b></th><th><b>Fréquence</b></th></tr>' + map + '</table>';
+            // Injecter le tableau dans l'élément HTML
+            document.getElementById('page-analysis').innerHTML = resultat;
+            }
+}
+
+

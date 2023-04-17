@@ -36,29 +36,45 @@
 					<li>Dune, F. Herbert</li>
 				</ol>
 			</div> 
-			<h4>Les pays que j'aime sont : <h4>
+			<h4>J'aime: <h4>
 			<h5>
 			<ul>
-				<li>la France</li>
-				<li>la Corée</li>
-				<li>l'Egypte</li>
-				<li>l'Espagne</li>
-				<li>le japon</li>
+				<li>Les cochons-d'Inde</li>
+				<li>Les cochons-d'Inde</li>
+				<li>Les bruits de cochons-d'Inde</li>
+				<li>Caresser des cochons-d'Inde</li>
+				<li>M'occuper de cochons-d'Inde</li>
 			</ul>
 			 </h5>
-			<p>Mon pays préféré est</p>
-			<p id="pays"></p>
+			<p>Mes animaux préférés sont</p>
+			<p id="animal"></p>
 			<script>
-				let text = "la France, la Corée, l'Egypte, l'Espagne, le Japon";
-				let part = text.slice(10,19);
-				document.getElementById("pays").innerHTML = part; 
+				let text = "Les cochons-d'Inde, Les cochons-d'Inde, Les bruits de cochons-d'Inde, Caresser des cochons-d'Inde, M'occuper de cochons-d'Inde";
+				let part = text.slice(0,19);
+				document.getElementById("animal").innerHTML = part; 
 			</script>
 
-			<button onclick="myFunction()">Clic pour une surprise</button>
-				<p id="surprise"></p>
+			<button onclick="myFunction()">Clic si tu as le hoquet</button>
+				<p id="Hoquet"></p>
 			<script>
 				function myFunction() {
-					document.getElementById("surprise").innerHTML = "Bouh !!";
+					document.getElementById("Hoquet").innerHTML = "Booh !!";
+				}
+			</script>
+			
+			<button onclick="otherFunction()">Clic pour une surprise</button>
+				<p id="surprise"></p>
+			<script>
+				function otherFunction() {
+					document.getElementById("surprise").innerHTML = "Surprise ^^";
+				}
+			</script>
+			
+			<button onclick="anotherFunction()">Clic pour une autre surprise</button>
+				<p id="other surprise"></p>
+			<script>
+				function anotherFunction() {
+					document.getElementById("other surprise").innerHTML = "Surprise ^^";
 				}
 			</script>
 			
@@ -70,10 +86,11 @@
                 <div>
                     <center><button id="button_aide" onclick="showHide_aide()">Afficher l'aide</button></center>
                     <div id="aide" style="display:none;">
-                        <p>Voici un mode d'emploi :
+                        <p>Mode d'emploi pour les nuls :
                         </br>Etape 1 : Chargez un texte au format .txt à l'aide du bouton Parcourir.
                         </br>Etape 2 (facultatif) : Cliquez sur le bouton Segmentation (et précisez les délimiteurs si besoin avant).
-                        </br>Etape 3 :  Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences</p>
+                        </br>Etape 3 :  Cliquez sur le bouton Dictionnaire pour obtenir un tableau qui classe les tokens de façon décroissante en fonction du nombre d'occurences
+						</br>C'est bon, t'as compris ?</p>
                     </div>
                 </div>
                 </br>
@@ -105,16 +122,17 @@
                     </small>
                     <br />
                     <br />
-                    <button onclick="alert('Voici un site qui permet d\'analyser des textes.');"><span>Bonjour</span></button>
+                    <button onclick="alert('Je vous ai déjà dit que j\'aimais les cochons d\'Inde ?');"><span>Bonjour</span></button>
                     <br />
                     <br />
                     <button class="dict" onclick="segText()"><span>Segmentation</span></button>
                     <button class="submit" onclick="dictionnaire()"><span>Dictionnaire</span></button>
                     <button class="grep" id="btnGrep" onclick="grep()"><span>GREP</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 3</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 4</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 5</span></button>
-                    <button class="submit" onclick="alert('Je ne fais rien, changez-moi !')"><span>action 6</span></button>
+                    <button class="submit" onclick="concord()"><span>concordancier</span></button>
+					<button class="nbPh" onclick="nbPhrases()"><span>Nombre de phrases</span></button>
+					<button class="motL" onclick="tokenLong()"><span>Mots les plus longs</span></button>
+					<button class="top10" onclick="top10freq()"><span>Top 10 des mots les plus fréquents</span></button>
+					<button onclick="alert('J\'ai dit que j\'était inutile, pourquoi tu clic ?');"><span>Inutile</span></button>
                 </p>
             </div>
             <div id="logger" style="width:100%"></div>
@@ -129,7 +147,7 @@
                 <!-- FIN Analyse des données dans un fichier -->			
 				<footer>
 				<p>Aller sur le site de 
-					<a href="http://www.univ-paris3.fr/">Paris 3</a>.
+					<a href="https://www.especesanimales.com/cochon-dinde-toutes-les-races-avec-photos/">Paris 3</a> (ou pas)
 				</p>
 			</footer>
 		</body>
